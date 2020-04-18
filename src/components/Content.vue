@@ -1,5 +1,5 @@
 <template>
-<v-container fluid>
+<v-container>
   <v-row>
      <v-carousel cycle hide-delimiters :show-arrows="false">
     <v-carousel-item

@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <Header />
-    <Menu />
+    <!-- <Menu /> <-->
     <v-content>
       <router-view />
     </v-content>
@@ -10,11 +10,11 @@
 
 <script>
 import Header from "@/components/Header";
-import Menu from "@/components/Menu";
+// import Menu from "@/components/Menu";
 export default {
   components: {
     Header,
-    Menu
+    // Menu
   }
 };
 </script>

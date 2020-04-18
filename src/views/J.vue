@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <v-container>
+
     <p class="animated bounceInDown">aaaa</p>
     <ul id="example-1">
       <li v-for="item in items" :key="item.message" class="animated bounceInDown">{{ item.message }}</li>
@@ -11,7 +12,7 @@
     <ul>
       <li v-for="a in arr" :key="a">{{ diff(a) + a}}</li>
     </ul>
-  </div>
+  </v-container>
 </template>
 <script>
 import moment from "moment"
@@ -24,7 +25,6 @@ export default {
       { message: 'Bar' }
     ],
     D: "2021-04-01",
-    // D: moment().toString(),
     NEXT_MEET: "2020-06-01",
     TWO_YEARS: "2020-11-11",
     arr : ['seconds', 'minutes', 'hours', 'days', 'weeks', 'months'],
@@ -36,8 +36,6 @@ export default {
         this.i++
     },
     diff:function(time){
-        // console.log(time,this.D);
-        
         let a = moment(this.D)
         return a.diff(moment(),time)
     }

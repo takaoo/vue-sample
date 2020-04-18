@@ -1,5 +1,5 @@
 <template>
-    <v-navigation-drawer app permanent expand-on-hover>
+    <v-navigation-drawer app temporary absolute v-model="d">
       <v-list>
         <v-list-item class="px-2">
           <v-list-item-avatar>
@@ -53,5 +53,6 @@ export default {
   components: {
     
   },
+  props: ['d']
 };
 </script>
