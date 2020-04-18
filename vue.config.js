@@ -4,5 +4,8 @@ module.exports = {
   "outputDir": "dist",
   "transpileDependencies": [
     "vuetify"
-  ]
+  ],
+  "devServer": {
+    port: 3000
+  }
 }
