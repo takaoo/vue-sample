@@ -1,16 +1,6 @@
 <template>
 <v-container>
   <v-row>
-     <v-carousel cycle hide-delimiters :show-arrows="false">
-    <v-carousel-item
-      v-for="(item,i) in items"
-      :key="i"
-      :src="item.src"
-    ></v-carousel-item>
-  </v-carousel>
-  </v-row>
-
-  <v-row>
      <v-card
     class="mx-auto"
     max-width="400"
@@ -48,51 +38,7 @@
     </v-card-actions>
   </v-card>
   </v-row>
-  <v-row align="center">
-    
-    <v-col class="text-center" cols="12" sm="4">
-      <div class="my-2">
-        <v-btn small>Normal</v-btn>
-      </div>
-      <div class="my-2">
-        <v-btn small color="primary">Primary</v-btn>
-      </div>
-      <div class="my-2">
-        <v-btn small color="error">Error</v-btn>
-      </div>
-      <div class="my-2">
-        <v-btn small disabled>Disabled</v-btn>
-      </div>
-    </v-col>
-    <v-col class="text-center" cols="12" sm="4">
-      <div class="my-2">
-        <v-btn>Normal</v-btn>
-      </div>
-      <div class="my-2">
-        <v-btn color="primary">Primary</v-btn>
-      </div>
-      <div class="my-2">
-        <v-btn color="error">Error</v-btn>
-      </div>
-      <div class="my-2">
-        <v-btn disabled>Disabled</v-btn>
-      </div>
-    </v-col>
-    <v-col class="text-center" cols="12" sm="4">
-      <div class="my-2">
-        <v-btn large>Normal</v-btn>
-      </div>
-      <div class="my-2">
-        <v-btn large color="primary">Primary</v-btn>
-      </div>
-      <div class="my-2">
-        <v-btn large color="error">Error</v-btn>
-      </div>
-      <div class="my-2">
-        <v-btn large disabled>Disabled</v-btn>
-      </div>
-    </v-col>
-  </v-row>
+
   </v-container>
 </template>
 
