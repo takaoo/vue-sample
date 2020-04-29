@@ -59,11 +59,11 @@
           </v-list-item-icon>
           <v-list-item-title>Shared with me</v-list-item-title>
         </v-list-item>
-        <v-list-item link>
+        <v-list-item link to="matter">
           <v-list-item-icon>
             <v-icon>mdi-star</v-icon>
           </v-list-item-icon>
-          <v-list-item-title>Starred</v-list-item-title>
+          <v-list-item-title>Matter</v-list-item-title>
         </v-list-item>
         <v-list-item link to="j">
           <v-list-item-icon>

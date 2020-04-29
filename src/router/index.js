@@ -21,6 +21,11 @@ Vue.use(VueRouter)
     path: '/j',
     name: 'j',
     component: () => import('../views/J.vue')
+  },
+  {
+    path: '/matter',
+    name: 'matter',
+    component: () => import('../views/Matter.vue')
   }
 ]
 
