@@ -8,14 +8,7 @@
 import Matter from "matter-js";
 
 export default {
-  data: function() {
-    return {
-      debug: null,
-      canvasProp: {
-        wallWidth: 1
-      }
-    };
-  },
+  data: () => ({}),
   mounted() {
     // module aliases
     var Engine = Matter.Engine,
@@ -26,32 +19,40 @@ export default {
     // create an engine
     var engine = Engine.create();
 
+    var width = window.innerWidth * 0.9;
+    var height = window.innerHeight;
     // create a renderer
     var render = Render.create({
       element: document.querySelector("#drawhere"),
-      engine: engine
+      engine: engine,
+      options: {
+        width: width,
+        height: height,
+        pixelRatio: 2, //Pixel比; スマホ用に2にする
+        wireframes: false,
+        // background: '#fff'
+      },
     });
+    console.log(render);
+    
 
     // create two boxes and a ground
-    var boxA = Bodies.rectangle(400, 200, 80, 80,{ frictionAir: 0.5 });
-    var boxB = Bodies.rectangle(450, 50, 80, 80);
-    var ground = Bodies.rectangle(400, 610, 810, 60, { isStatic: true });
+    var boxA = Bodies.rectangle(width*0.1, 200, width * 0.15, width * 0.15, { frictionAir: 0.5 });
+    var boxB = Bodies.rectangle(width*0.15, 50, width * 0.15, width * 0.15, {
+      render: {
+        // fillStyle: "#fff123",
+      }
+    });
 
     // walls
-    var a = Bodies.rectangle(400, 0, 800, 50, { isStatic: true }),
-      b = Bodies.rectangle(400, 600, 800, 50, { isStatic: true }),
-      c = Bodies.rectangle(800, 300, 50, 600, { isStatic: true }),
-      d = Bodies.rectangle(0, 300, 50, 600, { isStatic: true });
+    World.add(engine.world, [
+      // Bodies.rectangle(400, 0, 800, 5, { isStatic: true }),
+      Bodies.rectangle(width*0.5, 550, width*0.9, 50, { isStatic: true })
+      // Bodies.rectangle(800, 300, 50, 600, { isStatic: true }),
+      // Bodies.rectangle(0, 300, 50, 600, { isStatic: true })
+    ]);
 
-    // var stack = Matter.Composites.stack(200, 0, 5, 5, 50, 0, function(x, y) {
-    //   return Bodies.circle(x, y, Matter.Common.random(1, 30), {
-    //     restitution: 0.8, //弾力０〜１
-    //     // friction: 1 //摩擦0~1
-    //   });
-    // });
-
-    // add all of the bodies to the world
-    World.add(engine.world, [boxA, boxB, ground, a, b, c, d]);
+    World.add(engine.world, [boxA, boxB]);
 
     // add mouse control
     var mouse = Matter.Mouse.create(render.canvas),
@@ -67,19 +68,56 @@ export default {
 
     World.add(engine.world, mouseConstraint);
 
-    World.add(engine.world, [
-      // Matter.Composites.car(100, 0, 100, 10, 10),
-       Matter.Composites.pyramid(200, 258, 5, 4, 0, 0, function(x, y) {
-        return Bodies.rectangle(x, y, 40, 40);
-    })
-      ]
-    )
-
     // run the engine
     Engine.run(engine);
 
     // run the renderer
     Render.run(render);
+
+    // add cloth bodies
+    var group = Matter.Body.nextGroup(true),
+      particleOptions = {
+        friction: 0.00001,
+        collisionFilter: { group: group },
+        render: { visible: false }
+      },
+      constraintOptions = { stiffness: 0.06 },
+      cloth = Matter.Composites.softBody(
+        width * 0.4,
+        height * 0.3,
+        20,
+        10,
+        10,
+        20,
+        false,
+        5,
+        particleOptions,
+        constraintOptions
+      );
+
+    for (var i = 0; i < 20; i++) {
+      cloth.bodies[i].isStatic = true;
+    }
+
+    World.add(engine.world, [
+      // cloth,
+      Bodies.circle(width * 0.6, height * 0.8, width * 0.1, { isStatic: true }),
+      // Matter.Composites.newtonsCradle(width * 0.6, height * 0.5, 6, 20, 200)
+      // Matter.Composites.pyramid(100, 258, 10, 10, 0, 0, function(x, y) {
+      //   return Bodies.rectangle(x, y, 20, 20);
+      // })   
+    ]);
+
+    // マウス押したら物体出現
+    Matter.Events.on(mouseConstraint,"mousedown",(e)=>{
+      // console.log(e,"down");
+      World.add(engine.world, [
+      Matter.Bodies.rectangle(e.mouse.absolute.x,e.mouse.absolute.y,20,20)
+    ]);
+      
+
+      
+    })
   }
 };
 </script>
