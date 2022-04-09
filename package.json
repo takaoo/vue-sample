@@ -12,7 +12,7 @@
     "core-js": "^3.6.4",
     "gh-pages": "^2.2.0",
     "matter-js": "^0.14.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "poly-decomp": "^0.3.0",
     "vue": "^2.6.11",
     "vue-router": "^3.1.6",
